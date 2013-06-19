@@ -21,7 +21,7 @@
       "url": "http://asciidisco.github.com/grunt-documantix/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "index.js",
+  "main": "tasks/documantix.js",
   "engines": {
     "node": ">=0.8.0"
   },
