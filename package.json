@@ -22,7 +22,6 @@
     }
   ],
   "main": "index.js",
-  "bin": "bin/grunt-documantix",
   "engines": {
     "node": ">=0.8.0"
   },
