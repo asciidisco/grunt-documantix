@@ -1,0 +1,38 @@
+{
+  "name": "grunt-documantix",
+  "description": "Creates html docs out of docblock stuff",
+  "version": "0.0.1",
+  "homepage": "http://asciidisco.github.com/grunt-documantix/",
+  "author": {
+    "name": "asciidisco",
+    "email": "public@asciidisco.com",
+    "url": "http://www.asciidisco.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asciidisco/grunt-documantix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asciidisco/grunt-documantix/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://asciidisco.github.com/grunt-documantix/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "index.js",
+  "bin": "bin/grunt-documantix",
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "esprima": "~1.0.3",
+    "handlebars": "~1.0.12",
+    "markdown": "~0.4.0",
+    "cheerio": "~0.12.0"
+  },
+  "keywords": [
+    "gruntplugin", "docs"
+  ]
+}
