@@ -83,7 +83,7 @@ module.exports = function(grunt) {
             });
 
             pc.html = markdown.toHTML(pc.md);
-            pc.html = (pc.annotations.method ? '<h2 class="method"> .' + pc.annotations.method + '</h2>' : '<h1 class="topic">' + pc.annotations.part + '</h1>') + pc.html
+            pc.html = (pc.annotations.method ? '<a name="meth-' + pc.annotations.method + '"></a><h2 class="method"> .' + pc.annotations.method + '</h2>' : '<h1 class="topic">' + pc.annotations.part + '</h1>') + pc.html
 
             if (pc.annotations.api) {
               parsedComments.push(pc);
@@ -123,8 +123,19 @@ module.exports = function(grunt) {
             }
           });
 
+          // add sidebar nav
+          var sidenav = '';
+          parsedComments.forEach(function (comment) {
+            if (comment.annotations.api && comment.annotations.method) {
+              sidenav += '<li class="nav-' + comment.annotations.method + '"><a href="#meth-' + comment.annotations.method + '">' + comment.annotations.method + '</a></li>'
+            }
+          });
+          content = '<div class="grid__item one-whole"><div class="grid__item one-quarter sidenav"><ul>' + Handlebars.compile(sidenav)() + '</ul></div><div class="grid__item three-quarters">' + content;
+
               if (parsedComments && parsedComments[0]) {
                 if (parsedComments[0].annotations.part && parsedComments[0].annotations.part.trim() !== '') {
+                  console.log(content);
+
                   grunt.file.write(config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html', Handlebars.compile(header)() + Handlebars.compile(content)() + Handlebars.compile(footer)());
                   grunt.log.ok('File generated: ' + config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html');
                   numberOfParsedFiles++;
