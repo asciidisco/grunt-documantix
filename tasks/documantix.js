@@ -134,7 +134,6 @@ module.exports = function(grunt) {
 
               if (parsedComments && parsedComments[0]) {
                 if (parsedComments[0].annotations.part && parsedComments[0].annotations.part.trim() !== '') {
-                  console.log(content);
 
                   grunt.file.write(config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html', Handlebars.compile(header)() + Handlebars.compile(content)() + Handlebars.compile(footer)());
                   grunt.log.ok('File generated: ' + config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html');
@@ -161,4 +160,3 @@ module.exports = function(grunt) {
 
   });
 };
-
