@@ -128,7 +128,7 @@ module.exports = function(grunt) {
           var sidenav = '';
           parsedComments.forEach(function (comment) {
             if (comment.annotations.api && comment.annotations.method) {
-              sidenav += '<li class="nav-' + comment.annotations.method + '"><a href="#meth-' + comment.annotations.method + '">' + comment.annotations.method + '</a></li>'
+              sidenav += '<li class="nav-meth-' + comment.annotations.method + '"><a href="#meth-' + comment.annotations.method + '">' + comment.annotations.method + '</a></li>'
             }
           });
           content = '<div class="grid__item one-whole"><div class="grid__item one-quarter sidenav" id="sidenav"><ul>' + Handlebars.compile(sidenav)(vars) + '</ul></div><div class="grid__item three-quarters" id="content"><div class="grid__item one-whole" id="scroller">' + content + '</div></div>';
