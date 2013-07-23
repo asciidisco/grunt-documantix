@@ -12,12 +12,13 @@ module.exports = function(grunt) {
   // grunt task def.
   grunt.registerTask('documantix', 'Documents stuff.', function() {
     var done = this.async();
-
     var header = '';
     var footer = '';
 
     var config = grunt.config.get('documantix');
     var files = grunt.file.expand(config.src);
+
+    var vars = config.options.vars;
 
     var numberOfFiles = files.length;
     var numberOfParsedFiles = 0;
@@ -83,7 +84,7 @@ module.exports = function(grunt) {
             });
 
             pc.html = markdown.toHTML(pc.md);
-            pc.html = (pc.annotations.method ? '<a lass="nav-helper" data-name="meth-' + pc.annotations.method + '"></a><h2 class="method"> .' + pc.annotations.method + '</h2>' : '<h1 class="topic">' + pc.annotations.part + '</h1>') + pc.html
+            pc.html = (pc.annotations.method ? '<a class="nav-helper" data-name="meth-' + pc.annotations.method + '"></a><h2 class="method"> .' + pc.annotations.method + '</h2>' : '<h1 class="topic">' + pc.annotations.part + '</h1>') + pc.html;
 
             if (pc.annotations.api) {
               parsedComments.push(pc);
@@ -130,12 +131,12 @@ module.exports = function(grunt) {
               sidenav += '<li class="nav-' + comment.annotations.method + '"><a href="#meth-' + comment.annotations.method + '">' + comment.annotations.method + '</a></li>'
             }
           });
-          content = '<div class="grid__item one-whole"><div class="grid__item one-quarter sidenav" id="sidenav"><ul>' + Handlebars.compile(sidenav)() + '</ul></div><div class="grid__item three-quarters" id="content">' + content + '</div>';
+          content = '<div class="grid__item one-whole"><div class="grid__item one-quarter sidenav" id="sidenav"><ul>' + Handlebars.compile(sidenav)(vars) + '</ul></div><div class="grid__item three-quarters" id="content">' + content + '</div>';
 
               if (parsedComments && parsedComments[0]) {
                 if (parsedComments[0].annotations.part && parsedComments[0].annotations.part.trim() !== '') {
 
-                  grunt.file.write(config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html', Handlebars.compile(header)() + Handlebars.compile(content)() + Handlebars.compile(footer)());
+                  grunt.file.write(config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html', Handlebars.compile(header)(vars) + Handlebars.compile(content)(vars) + Handlebars.compile(footer)(vars));
                   grunt.log.ok('File generated: ' + config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html');
                   numberOfParsedFiles++;
                 } else {
