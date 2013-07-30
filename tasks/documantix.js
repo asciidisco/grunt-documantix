@@ -140,13 +140,14 @@ module.exports = function(grunt) {
             }
           });
 
+          var oldContent = content;
           content = '<div class="grid__item one-whole">';
 
           if (hasNavElements) {
             content += '<div class="grid__item one-quarter sidenav" id="sidenav"><ul>' + Handlebars.compile(sidenav)(vars) + '</ul></div>';
-            content += '<div class="grid__item three-quarters" id="content"><div class="grid__item one-whole" id="scroller">' + content + '</div></div>';
+            content += '<div class="grid__item three-quarters" id="content"><div class="grid__item one-whole" id="scroller">' + oldContent + '</div></div>';
           } else {
-            content += '<div class="grid__item one-whole">' + content + '</div>';
+            content += '<div class="grid__item one-whole">' + oldContent + '</div>';
           }
 
           content += '</div>';
