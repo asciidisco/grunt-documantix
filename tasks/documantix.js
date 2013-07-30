@@ -116,6 +116,12 @@ module.exports = function(grunt) {
                   var plum = $('<pre><code class="language-css">' + contents + '</code></pre>');
                   $('code').eq(idx).replaceWith(plum);
                 }
+
+                if ($(el).html().substr(0, 3) === 'bash') {
+                  var contents = $(el).html().substring(3);
+                  var plum = $('<pre><code class="language-bash">' + contents + '</code></pre>');
+                  $('code').eq(idx).replaceWith(plum);
+                }
               });
 
 
