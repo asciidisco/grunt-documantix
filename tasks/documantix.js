@@ -149,8 +149,8 @@ module.exports = function(grunt) {
           } else {
             content += '<div class="grid__item one-whole">' + oldContent + '</div>';
           }
-
           content += '</div>';
+          vars.isSidebar = hasNavElements;
 
               if (parsedComments && parsedComments[0]) {
                 if (parsedComments[0].annotations.part && parsedComments[0].annotations.part.trim() !== '') {
