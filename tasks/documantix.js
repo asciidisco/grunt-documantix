@@ -117,8 +117,8 @@ module.exports = function(grunt) {
                   $('code').eq(idx).replaceWith(plum);
                 }
 
-                if ($(el).html().substr(0, 3) === 'bash') {
-                  var contents = $(el).html().substring(3);
+                if ($(el).html().substr(0, 4) === 'bash') {
+                  var contents = $(el).html().substring(4);
                   var plum = $('<pre><code class="language-bash">' + contents + '</code></pre>');
                   $('code').eq(idx).replaceWith(plum);
                 }
