@@ -134,7 +134,7 @@ module.exports = function(grunt) {
             }
           });
 
-          content += '<div class="grid__item one-whole">';
+          content = '<div class="grid__item one-whole">';
 
           if (hasNavElements) {
             content += '<div class="grid__item one-quarter sidenav" id="sidenav"><ul>' + Handlebars.compile(sidenav)(vars) + '</ul></div>';
