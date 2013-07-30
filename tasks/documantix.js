@@ -126,12 +126,24 @@ module.exports = function(grunt) {
 
           // add sidebar nav
           var sidenav = '';
+          var hasNavElements = false;
           parsedComments.forEach(function (comment) {
             if (comment.annotations.api && comment.annotations.method) {
+              hasNavElements = true;
               sidenav += '<li class="nav-meth-' + comment.annotations.method + '"><a href="#meth-' + comment.annotations.method + '">' + comment.annotations.method + '</a></li>'
             }
           });
-          content = '<div class="grid__item one-whole"><div class="grid__item one-quarter sidenav" id="sidenav"><ul>' + Handlebars.compile(sidenav)(vars) + '</ul></div><div class="grid__item three-quarters" id="content"><div class="grid__item one-whole" id="scroller">' + content + '</div></div>';
+
+          content += '<div class="grid__item one-whole">';
+
+          if (hasNavElements) {
+            content += '<div class="grid__item one-quarter sidenav" id="sidenav"><ul>' + Handlebars.compile(sidenav)(vars) + '</ul></div>';
+            content += '<div class="grid__item three-quarters" id="content"><div class="grid__item one-whole" id="scroller">' + content + '</div></div>';
+          } else {
+            content += '<div class="grid__item one-whole">' + content + '</div>';
+          }
+
+          content += '</div>';
 
               if (parsedComments && parsedComments[0]) {
                 if (parsedComments[0].annotations.part && parsedComments[0].annotations.part.trim() !== '') {
