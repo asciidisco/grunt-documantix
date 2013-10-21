@@ -1,7 +1,7 @@
 {
   "name": "grunt-documantix",
   "description": "Creates html docs out of docblock stuff",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "homepage": "http://asciidisco.github.com/grunt-documantix/",
   "author": {
     "name": "asciidisco",
