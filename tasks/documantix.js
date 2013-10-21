@@ -6,44 +6,42 @@ var markdown = require('markdown').markdown;
 var Handlebars = require('handlebars');
 var cheerio = require('cheerio');
 
-
 module.exports = function(grunt) {
 
   // grunt task def.
-  grunt.registerTask('documantix', 'Documents stuff.', function() {
+  grunt.registerMultiTask('documantix', 'Documents stuff.', function() {
     var done = this.async();
     var header = '';
     var footer = '';
 
-    var config = grunt.config.get('documantix');
-    var files = grunt.file.expand(config.src);
+    var config = this.options();
+    var files = this.files[0].src;
 
-    var vars = config.options.vars;
+    var vars = config.vars;
 
     var numberOfFiles = files.length;
     var numberOfParsedFiles = 0;
 
     // load header
-    https.get('https://raw.github.com/' + config.options.header, function(headRes) {
+    https.get('https://raw.github.com/' + config.header, function(headRes) {
       headRes.on('data', function(d) {
         header += d;
       });
 
       headRes.on('end', function () {
 
-
-    https.get('https://raw.github.com/' + config.options.footer, function(footRes) {
+    https.get('https://raw.github.com/' + config.footer, function(footRes) {
       footRes.on('data', function(d) {
         footer += d;
       });
 
       footRes.on('end', function () {
-
         files.forEach(function (file) {
           var comments = [];
           var parsedComments = [];
           var content = '';
           var contents = fs.readFileSync(file);
+
           // parse comments
           comments = esprima.parse(contents, {comment: true}).comments;
 
@@ -155,8 +153,8 @@ module.exports = function(grunt) {
               if (parsedComments && parsedComments[0]) {
                 if (parsedComments[0].annotations.part && parsedComments[0].annotations.part.trim() !== '') {
 
-                  grunt.file.write(config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html', Handlebars.compile(header)(vars) + Handlebars.compile(content)(vars) + Handlebars.compile(footer)(vars));
-                  grunt.log.ok('File generated: ' + config.options.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html');
+                  grunt.file.write(config.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html', Handlebars.compile(header)(vars) + Handlebars.compile(content)(vars) + Handlebars.compile(footer)(vars));
+                  grunt.log.ok('File generated: ' + config.target + '/' + parsedComments[0].annotations.part.toLowerCase() + '.html');
                   numberOfParsedFiles++;
                 } else {
                   numberOfParsedFiles++;
