@@ -23,14 +23,14 @@ module.exports = function(grunt) {
     var numberOfParsedFiles = 0;
 
     // load header
-    https.get('https://raw.github.com/' + config.header, function(headRes) {
+    https.get('https://raw.githubusercontent.com/' + config.header, function(headRes) {
       headRes.on('data', function(d) {
         header += d;
       });
 
       headRes.on('end', function () {
 
-    https.get('https://raw.github.com/' + config.footer, function(footRes) {
+    https.get('https://raw.githubusercontent.com/' + config.footer, function(footRes) {
       footRes.on('data', function(d) {
         footer += d;
       });
